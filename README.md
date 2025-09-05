@@ -15,3 +15,5 @@
 This app uses geospatial data licensed under the [Government of Saskatchewan Standard Unrestricted Use Data Licence (Version 2.0)](https://gisappl.saskatchewan.ca/Html5Ext/Resources/GOS_Standard_Unrestricted_Use_Data_Licence_v2.0.pdf).
 
 > “Contains information licensed under the Government of Saskatchewan Standard Unrestricted Use Data Licence (Version 2.0).”
+
+Privacy Policy Link: https://seanbuchko.github.io/SKHighway-Locator/privacy_policy.html
