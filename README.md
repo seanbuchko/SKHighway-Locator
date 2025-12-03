@@ -2,7 +2,10 @@
 
 Developed by 10223629 Saskatchewan Ltd.
 
-**SKHighway Locator** is an iOS application that uses geospatial data from the Province of Saskatchewan to help users identify the nearest highway to their current location. The app provides detailed information including the highway name, station, and offset from the centerline.
+**SKHighway Locator** is an iOS and Android application that uses geospatial data from the Province of Saskatchewan to help users identify the nearest highway to their current location. The app provides detailed information including the highway name, station, and offset from the centerline.
+
+Link to Apple App Store: https://apps.apple.com/us/app/skhighway-locator/id6748362557
+Link to Google Play Store: https://play.google.com/store/apps/details?id=com.seanbuchko.skhighway
 
 ## 📱 Features
 
