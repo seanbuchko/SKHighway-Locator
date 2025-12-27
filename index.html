@@ -26,6 +26,24 @@
             margin: 0.5rem 0;
             font-size: 1.1rem;
         }
+        nav {
+            margin-top: 1rem;
+        }
+        nav a.button {
+            display: inline-block;
+            background-color: #fff;
+            color: #0057b7;
+            padding: 0.5rem 1rem;
+            margin: 0 0.3rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        nav a.button:hover {
+            background-color: #003f7f;
+            color: #fff;
+        }
         .container {
             max-width: 900px;
             margin: 2rem auto;
@@ -35,7 +53,7 @@
             color: #0057b7;
             margin-top: 2rem;
         }
-        a.button {
+        a.download-button {
             display: inline-block;
             background-color: #0057b7;
             color: #fff;
@@ -45,7 +63,7 @@
             border-radius: 5px;
             transition: background-color 0.3s ease;
         }
-        a.button:hover {
+        a.download-button:hover {
             background-color: #003f7f;
         }
         footer {
@@ -58,22 +76,34 @@
             list-style-type: disc;
             padding-left: 1.5rem;
         }
+        .contact a {
+            color: #0057b7;
+            text-decoration: none;
+        }
+        .contact a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>SKHighway Locator</h1>
         <p>Developed by 10223629 Saskatchewan Ltd.</p>
+        <nav>
+            <a class="button" href="#download">Download</a>
+            <a class="button" href="#features">Features</a>
+            <a class="button" href="#contact">Contact Us</a>
+        </nav>
     </header>
 
     <div class="container">
-        <section>
+        <section id="download">
             <h2>Download the App</h2>
-            <a class="button" href="YOUR_APPLE_STORE_LINK_HERE" target="_blank">Apple App Store</a>
-            <a class="button" href="YOUR_GOOGLE_PLAY_LINK_HERE" target="_blank">Google Play Store</a>
+             <a class="download-button" href="https://apps.apple.com/ca/app/skhighway-locator/id6748362557" target="_blank">Apple App Store</a>
+            <a class="download-button" href="https://play.google.com/store/apps/details?id=com.seanbuchko.skhighway&hl=en_CA" target="_blank">Google Play Store</a>
         </section>
 
-        <section>
+        <section id="features">
             <h2>Features</h2>
             <ul>
                 <li>Real-time location tracking</li>
@@ -84,15 +114,20 @@
             </ul>
         </section>
 
-        <section>
+        <section id="data">
             <h2>Data Source & License</h2>
             <p>This app uses unaltered geospatial data licensed under the Government of Saskatchewan Standard Unrestricted Use Data Licence (Version 2.0).</p>
             <p>“Contains information licensed under the Government of Saskatchewan Standard Unrestricted Use Data Licence (Version 2.0).”</p>
         </section>
 
-        <section>
+        <section id="privacy">
             <h2>Privacy Policy</h2>
             <p><a href="https://seanbuchko.github.io/SKHighway-Locator/privacy_policy.html" target="_blank">View our Privacy Policy</a></p>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2>Contact Us</h2>
+            <p>If you have any questions, reach out to us at: <a href="mailto:skhighwaylocator@102223629.ca">skhighwaylocator@102223629.ca</a></p>
         </section>
     </div>
 
@@ -101,3 +136,4 @@
     </footer>
 </body>
 </html>
+
