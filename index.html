@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,6 +84,23 @@
         .contact a:hover {
             text-decoration: underline;
         }
+        .note {
+            background: #eef4ff;
+            border-left: 4px solid #0057b7;
+            padding: 0.8rem 1rem;
+            margin: 1rem 0;
+        }
+        code, pre {
+            background-color: #f4f4f4;
+            border-radius: 4px;
+        }
+        code {
+            padding: 0.2rem 0.4rem;
+        }
+        pre {
+            padding: 0.8rem 1rem;
+            overflow-x: auto;
+        }
     </style>
 </head>
 <body>
@@ -92,6 +110,7 @@
         <nav>
             <a class="button" href="#download">Download</a>
             <a class="button" href="#features">Features</a>
+            <a class="button" href="#powershell">PowerShell Script</a>
             <a class="button" href="#about">About Us</a>
             <a class="button" href="#contact">Contact Us</a>
         </nav>
@@ -100,8 +119,8 @@
     <div class="container">
         <section id="download">
             <h2>Download the App</h2>
-            <a class="download-button" href="https://apps.apple.com/ca/app/skhighway-locator/id6748362557" target="_blank">Apple App Store</a>
-            <a class="download-button" href="https://play.google.com/store/apps/details?id=com.seanbuchko.skhighway&hl=en_CA" target="_blank">Google Play Store</a>
+            <a class="download-button" href="https://apps.apple.com/ca/app/skhighway-locator/id6748362557" target="_blank" rel="noopener">Apple App Store</a>
+            <a class="download-button" href="https://play.google.com/store/apps/details?id=com.seanbuchko.skhighway&hl=en_CA" target="_blank" rel="noopener">Google Play Store</a>
         </section>
 
         <section id="features">
@@ -112,6 +131,56 @@
                 <li>Shows station and offset from the highway centerline</li>
                 <li>Clean and intuitive user interface</li>
                 <li>Built using official Saskatchewan geospatial data</li>
+            </ul>
+        </section>
+
+        <!-- New: PowerShell Script section -->
+        <section id="powershell">
+            <h2>PowerShell Script: Photo CSV + KML Generator</h2>
+            <p>
+                This Windows PowerShell script scans a selected folder and all subfolders for JPEG photos, reads EXIF GPS
+                and title metadata, and generates:
+            </p>
+            <ul>
+                <li><strong>photo_metadata.csv</strong> — includes columns for <em>FileName</em>, <em>PhotoFolder</em> (relative), <em>DateTaken</em>, <em>Latitude</em>, <em>Longitude</em>, and labeled fields parsed from the photo <em>Title</em> (<code>Road</code>, <code>Station</code>, <code>Offset</code>, <code>Accuracy</code>, <code>Note</code>), plus an Excel-friendly hyperlink (<code>=HYPERLINK("...","Open Photo")</code>).</li>
+                <li><strong>photo_map.kml</strong> — a Google Earth placemark file where each pin uses the photo’s GPS coordinates and shows the image and details in the description using <em>relative paths</em>.</li>
+            </ul>
+
+            <div class="note">
+                <strong>Relative paths supported:</strong> You can move the entire root folder (photos + CSV + KML) anywhere—links and images will continue to work.
+            </div>
+
+            <p>
+                <a class="download-button" href="https://102223629.ca/SKHighway%20Locator%20Powershell%20Script.ps1" download>
+                    Download PowerShell Script
+                </a>
+            </p>
+
+            <h3>How to Use (Windows)</h3>
+            <ol>
+                <li>Click the <strong>Download PowerShell Script</strong> button above and save the file (e.g., to your Desktop).</li>
+                <li>Right‑click the downloaded file → <strong>Properties</strong> → check <strong>Unblock</strong> (if present) → <strong>OK</strong>.</li>
+                <li>Open <strong>Windows PowerShell</strong> (or <strong>PowerShell</strong> in Windows) and run:
+                    <pre><code>Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+Unblock-File -Path "C:\Path\To\SKHighway Locator Powershell Script.ps1"
+powershell -ExecutionPolicy Bypass -File "C:\Path\To\SKHighway Locator Powershell Script.ps1"</code></pre>
+                </li>
+                <li>When prompted, select the <strong>root folder</strong> containing your photos. The script will search subfolders automatically.</li>
+                <li>Open the generated <strong>photo_metadata.csv</strong> in Excel (double‑click to allow formulas to evaluate) and load <strong>photo_map.kml</strong> in Google Earth.</li>
+            </ol>
+
+            <h3>Requirements</h3>
+            <ul>
+                <li>Windows 10/11 with PowerShell (5.1 or 7.x on Windows)</li>
+                <li>JPEG photos with EXIF GPS for map pins (non‑GPS photos still appear in CSV)</li>
+                <li>Optional Title metadata in the format: <code>Road: ..., Station: ..., Offset: ..., Accuracy: ..., Note: ...</code></li>
+            </ul>
+
+            <h3>Notes</h3>
+            <ul>
+                <li>CSV hyperlinks are relative (e.g., <code>Subfolder\IMG_0005.JPG</code>) and work when opened directly in Excel.</li>
+                <li>KML image references are relative (e.g., <code>Subfolder/IMG_0005.JPG</code>) so photos display in Google Earth.</li>
+                <li>The script only scans <strong>.jpg / .jpeg</strong>. If you need <strong>.png</strong> or others, contact us.</li>
             </ul>
         </section>
 
@@ -138,7 +207,7 @@
         </section>
 
         <section id="data">
-            <h2>Data Source & License</h2>
+            <h2>Data Source &amp; License</h2>
             <p>
                 This app uses unaltered geospatial data licensed under the
                 Government of Saskatchewan Standard Unrestricted Use Data Licence
@@ -153,7 +222,7 @@
         <section id="privacy">
             <h2>Privacy Policy</h2>
             <p>
-                <a href="https://seanbuchko.github.io/SKHighway-Locator/privacy_policy.html" target="_blank">
+                <a href="https://seanbuchko.github.io/SKHighway-Locator/privacy_policy.html" target="_blank" rel="noopener">
                     View our Privacy Policy
                 </a>
             </p>
@@ -175,3 +244,4 @@
     </footer>
 </body>
 </html>
+``
