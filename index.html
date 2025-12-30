@@ -1,356 +1,132 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>SKHighway Locator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        header {
-            background-color: #0057b7;
-            color: #fff;
-            padding: 2rem 1rem;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0.5rem 0;
-        }
-        header p {
-            margin: 0.5rem 0;
-            font-size: 1.1rem;
-        }
-        nav {
-            margin-top: 1rem;
-        }
-        nav a.button {
-            display: inline-block;
-            background-color: #fff;
-            color: #0057b7;
-            padding: 0.5rem 1rem;
-            margin: 0 0.3rem;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        nav a.button:hover {
-            background-color: #003f7f;
-            color: #fff;
-        }
-        .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-        h2 {
-            color: #0057b7;
-            margin-top: 2rem;
-        }
-        h3 {
-            color: #0057b7;
-            margin-top: 1.2rem;
-        }
-        a.download-button {
-            display: inline-block;
-            background-color: #0057b7;
-            color: #fff;
-            padding: 0.7rem 1.2rem;
-            margin: 0.5rem 0.2rem;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-        a.download-button:hover {
-            background-color: #003f7f;
-        }
-        footer {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: #eaeaea;
-            margin-top: 3rem;
-        }
-        ul {
-            list-style-type: disc;
-            padding-left: 1.5rem;
-        }
-        ol {
-            padding-left: 1.5rem;
-        }
-        .contact a {
-            color: #0057b7;
-            text-decoration: none;
-        }
-        .contact a:hover {
-            text-decoration: underline;
-        }
-        .note {
-            background: #eef4ff;
-            border-left: 4px solid #0057b7;
-            padding: 0.8rem 1rem;
-            margin: 1rem 0;
-        }
-        code, pre {
-            background-color: #f4f4f4;
-            border-radius: 4px;
-        }
-        code {
-            padding: 0.2rem 0.4rem;
-        }
-        pre {
-            padding: 0.8rem 1rem;
-            overflow-x: auto;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SKHighway Locator</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+header {
+    background-color: #0057b7;
+    color: #fff;
+    padding: 2rem 1rem;
+    text-align: center;
+}
+nav a {
+    display: inline-block;
+    background: #fff;
+    color: #0057b7;
+    padding: 0.5rem 1rem;
+    margin: 0.3rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+nav a:hover {
+    background: #003f7f;
+    color: #fff;
+}
+.container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+h2 {
+    color: #0057b7;
+}
+.download-button {
+    display: inline-block;
+    background: #0057b7;
+    color: #fff;
+    padding: 0.7rem 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 0.3rem;
+}
+.download-button:hover {
+    background: #003f7f;
+}
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: #eaeaea;
+    margin-top: 3rem;
+}
+</style>
 </head>
+
 <body>
-    <header>
-        <h1>SKHighway Locator</h1>
-        <p>Developed by 102223629 Saskatchewan Ltd.</p>
-        <nav>
-            <a class="button" href="#download">Download</a>
-            <a class="button" href="#features">Features</a>
-            <a class="button" href="#powershell">PowerShell Script</a>
-            <a class="button" href="#powershell-ise">PowerShell ISE</a>
-            <a class="button" href="#workflow">Using SKHighway Locator Photos</a>
-            <a class="button" href="#about">About Us</a>
-            <a class="button" href="#data">License</a>
-            <a class="button" href="#privacy">Privacy</a>
-            <a class="button" href="#contact">Contact Us</a>
-        </nav>
-    </header>
+<header>
+    <h1>SKHighway Locator</h1>
+    <p>Developed by 10223629 Saskatchewan Ltd.</p>
+    <nav>
+        <a href="#download">Download</a>
+        <a href="#features">Features</a>
+        <a href="powershell.html">PowerShell Script</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
 
-    <div class="container">
-        <!-- App store links -->
-        <section id="download">
-            <h2>Download the App</h2>
-            <a class="download-button" href="https://apps.apple.com/ca/app/skhighway-locator/id6748362557" target="_blank" rel="noopener">Apple App Store</a>
-            <a class="download-button" href="https://play.google.com/store/apps/details?id=com.seanbuchko.skhighway&hl=en_CA" target="_blank" rel="noopener">Google Play Store</a>
-        </section>
+<div class="container">
 
-        <!-- Feature list -->
-        <section id="features">
-            <h2>Features</h2>
-            <ul>
-                <li>Real-time location tracking</li>
-                <li>Displays nearest highway based on GPS</li>
-                <li>Shows station and offset from the highway centerline</li>
-                <li>Clean and intuitive user interface</li>
-                <li>Built using official Saskatchewan geospatial data</li>
-            </ul>
-        </section>
+<section id="download">
+<h2>Download the App</h2>
+<a class="download-button" href="https://apps.apple.com/ca/app/skhighway-locator/id6748362557" target="_blank">Apple App Store</a>
+<a class="download-button" href="https://play.google.com/store/apps/details?id=com.seanbuchko.skhighway&hl=en_CA" target="_blank">Google Play Store</a>
+</section>
 
-        <!-- Script description + console instructions -->
-        <section id="powershell">
-            <h2>PowerShell Script: Photo CSV + KML Generator</h2>
-            <p>
-                This Windows PowerShell script scans a selected folder and all subfolders for JPEG photos, reads EXIF GPS
-                and title metadata, and generates:
-            </p>
-            <ul>
-                <li><strong>photo_metadata.csv</strong> — columns for <em>FileName</em>, <em>PhotoFolder</em> (relative), <em>DateTaken</em>, <em>Latitude</em>, <em>Longitude</em>, and labeled fields parsed from the photo <em>Title</em> (<code>Road</code>, <code>Station</code>, <code>Offset</code>, <code>Accuracy</code>, <code>Note</code>), plus an Excel-friendly hyperlink (<code>=HYPERLINK("...","Open Photo")</code>).</li>
-                <li><strong>photo_map.kml</strong> — a Google Earth placemark file where each pin uses the photo’s GPS coordinates and shows the image and details in the description using <em>relative paths</em>.</li>
-            </ul>
+<section id="features">
+<h2>Features</h2>
+<ul>
+<li>Real-time location tracking</li>
+<li>Nearest Saskatchewan highway identification</li>
+<li>Station and offset calculation</li>
+<li>Uses official provincial geospatial data</li>
+</ul>
+</section>
 
-            <div class="note">
-                <strong>Portable by design:</strong> The CSV hyperlinks and KML image references use relative paths. You can move the entire root folder (photos + CSV + KML) anywhere—links and images will still work.
-            </div>
+<section>
+<h2>Photo Processing & Mapping</h2>
+<p>
+SKHighway Locator photos can be processed on Windows using our
+<strong>PowerShell Photo CSV + KML Generator</strong>.
+</p>
+<p>
+<a class="download-button" href="powershell.html">
+View PowerShell Script Instructions
+</a>
+</p>
+</section>
 
-            <p>
-                <a class="download-button" href="https://102223629.ca/SKHighway%20Locator%20Powershell%20Script.ps1" target="_blank" rel="noopener">Download PowerShell Script (.ps1)</a>
-            </p>
+<section id="about">
+<h2>About Us</h2>
+<p>
+SKHighway Locator is developed by <strong>10223629 Saskatchewan Ltd.</strong>,
+a Saskatchewan-registered corporation specializing in location-based applications.
+</p>
+</section>
 
-            <h3>How to Run (PowerShell Console)</h3>
-            <ol>
-                <li>Download and save the script file (e.g., to your Desktop).</li>
-                <li>Right‑click the file → <strong>Properties</strong> → check <strong>Unblock</strong> (if present) → <strong>OK</strong>.</li>
-                <li>Open <strong>Windows PowerShell</strong> (or <strong>PowerShell</strong>) and run:
-                    <pre><code>Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
-Unblock-File -Path "C:\Path\To\SKHighway Locator Powershell Script.ps1"
-powershell -ExecutionPolicy Bypass -File "C:\Path\To\SKHighway Locator Powershell Script.ps1"</code></pre>
-                </li>
-                <li>When prompted, select the <strong>root folder</strong> containing your photos. The script will search subfolders automatically.</li>
-                <li>Open <strong>photo_metadata.csv</strong> in Excel and <strong>photo_map.kml</strong> in Google Earth.</li>
-            </ol>
-        </section>
+<section id="contact">
+<h2>Contact</h2>
+<p>
+Email:
+<a href="mailto:skhighwaylocator@102223629.ca">
+skhighwaylocator@102223629.ca
+</a>
+</p>
+</section>
 
-        <!-- PowerShell ISE instructions -->
-        <section id="powershell-ise">
-            <h2>How to Run with PowerShell ISE</h2>
-            <p>PowerShell ISE provides a GUI for editing and running scripts. Follow these steps:</p>
-            <ol>
-                <li>Download the script:
-                    <br/>
-                    <a href="https://102223629.ca/SKHighway%20Locator%20Powershell%20Script.ps1" target="_blank" rel="noopener">Download PowerShell Script (.ps1)</a>
-                </li>
-                <li>Unblock the file (Windows may mark downloaded scripts as blocked):
-                    <ul>
-                        <li>Right‑click the file → <strong>Properties</strong> → check <strong>Unblock</strong> → <strong>OK</strong>.</li>
-                        <li>Or run in PowerShell: <code>Unblock-File -Path "C:\Path\To\SKHighway Locator Powershell Script.ps1"</code></li>
-                    </ul>
-                </li>
-                <li>Open <strong>PowerShell ISE</strong>:
-                    <ul>
-                        <li>Press <strong>Win</strong>, type <strong>PowerShell ISE</strong>, and open the app.</li>
-                        <li>(Optional) Run ISE as Administrator if you need to change the execution policy for all users.</li>
-                    </ul>
-                </li>
-                <li>Ensure scripts can run (recommended setting for your user):
-                    <pre><code>Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned</code></pre>
-                </li>
-                <li>Load the script into ISE:
-                    <ul>
-                        <li>File → <strong>Open</strong> → select <em>SKHighway Locator Powershell Script.ps1</em>.</li>
-                    </ul>
-                </li>
-                <li>Run the script:
-                    <ul>
-                        <li>Press <strong>F5</strong> or click <strong>Run Script</strong>.</li>
-                        <li>A folder picker dialog will appear <strong>on top</strong>. You can <strong>paste a path</strong> or browse to the folder to use as the root.</li>
-                    </ul>
-                </li>
-                <li>Results:
-                    <ul>
-                        <li>The script scans the selected folder and all subfolders for <strong>.jpg / .jpeg</strong> files.</li>
-                        <li>It creates <strong>photo_metadata.csv</strong> and <strong>photo_map.kml</strong> in the selected root folder.</li>
-                        <li>Open the CSV in Excel (double‑click to allow formulas to evaluate) and load the KML in Google Earth.</li>
-                    </ul>
-                </li>
-            </ol>
-            <div class="note">
-                <strong>Troubleshooting ISE:</strong>
-                <ul>
-                    <li>If the folder dialog doesn’t appear, make sure ISE is the active window and press <strong>F5</strong> again. The script shows a TopMost owner window to bring the picker in front.</li>
-                    <li>If you see an execution policy error, re‑run: <code>Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned</code> in ISE’s console pane.</li>
-                </ul>
-            </div>
-        </section>
+</div>
 
-        <!-- NEW: Workflow — using app photos on Windows -->
-        <section id="workflow">
-            <h2>Using SKHighway Locator Photos on Windows (Transfer &amp; Process)</h2>
-            <p>
-                The SKHighway Locator app stores photos with GPS coordinates in EXIF and a structured <em>Title</em> like:
-                <code>Road: CS 102-27, Station: 9+933, Offset: 11 m Right, Accuracy: ±3 m, Note: photo of stream facing E</code>.
-                After transferring these photos to your Windows PC, the PowerShell script will read that metadata and produce
-                the CSV and KML in the root folder you select.
-            </p>
-
-            <h3>1) Transfer Photos From Your Phone (Preserve Metadata)</h3>
-            <ul>
-                <li><strong>USB cable (recommended):</strong> Connect your phone to Windows and copy the photos directly into a folder. This typically preserves EXIF and Title metadata.</li>
-                <li><strong>OneDrive / Google Drive:</strong> Sync or upload the photos, then download to your PC. Ensure you download the <em>original</em> files to keep metadata.</li>
-                <li><strong>iCloud for Windows:</strong> Use iCloud Photos to access originals and copy them to a local folder.</li>
-                <li><strong>Avoid “compressed” exports:</strong> Some messaging apps or social platforms strip or compress images and remove metadata—do not use them for transferring project photos.</li>
-            </ul>
-
-            <h3>2) File Formats (HEIC vs JPEG)</h3>
-            <ul>
-                <li>The script scans only <strong>.jpg / .jpeg</strong>. If your iPhone saves photos as <em>HEIC</em>, convert to JPEG before running the script.</li>
-                <li>Tip for iPhone: in <em>Settings → Camera → Formats</em>, choose <strong>Most Compatible</strong> to save new photos as JPEG.</li>
-                <li>On Windows, you can convert HEIC to JPEG using the Photos app or any reliable converter (ensure EXIF/GPS is preserved).</li>
-            </ul>
-
-            <h3>3) Organize Your Root Folder</h3>
-            <ul>
-                <li>Create a root folder (e.g., <code>C:\Projects\SKHwy102\Photos</code>) and copy all project photos into it. Subfolders are allowed.</li>
-                <li>Do <strong>not</strong> rename files during transfer if filenames are referenced elsewhere.</li>
-                <li>You can place the script anywhere; when you run it, you’ll <strong>select the root folder</strong> you created.</li>
-            </ul>
-
-            <h3>4) Run the PowerShell Script</h3>
-            <ul>
-                <li>Use the instructions above (Console or ISE) to run the script.</li>
-                <li>When prompted, select your <strong>root folder</strong>. The script will:
-                    <ul>
-                        <li>Search <em>all subfolders</em> for <strong>.jpg/.jpeg</strong>.</li>
-                        <li>Read EXIF GPS and Title metadata (Road/Station/Offset/Accuracy/Note).</li>
-                        <li>Create <strong>photo_metadata.csv</strong> and <strong>photo_map.kml</strong> in the root folder.</li>
-                    </ul>
-                </li>
-            </ul>
-
-            <h3>5) Use the Outputs</h3>
-            <ul>
-                <li><strong>CSV in Excel:</strong> The <em>PhotoLink</em> column uses formulas like <code>=HYPERLINK("Subfolder\IMG_0005.JPG","Open Photo")</code>. Click to open the photo in Windows.</li>
-                <li><strong>KML in Google Earth:</strong> Each placemark shows the image and a text block with file/folder and Title fields. Paths are <em>relative</em>, so the KML remains portable with the folder.</li>
-            </ul>
-
-            <h3>Troubleshooting</h3>
-            <ul>
-                <li><strong>No GPS?</strong> Some photos may lack EXIF GPS—those still appear in the CSV but won’t create map pins.</li>
-                <li><strong>Images not showing in KML:</strong> Ensure the KML and the photo folders remain together and that you didn’t move individual subfolders without the KML.</li>
-                <li><strong>Title fields missing:</strong> Confirm your transfer method preserved metadata; USB cable and cloud “original” downloads typically keep EXIF and Title intact.</li>
-                <li><strong>HEIC files:</strong> Convert to JPEG with metadata preserved, or set the camera to save JPEG directly.</li>
-            </ul>
-        </section>
-
-        <!-- About -->
-        <section id="about">
-            <h2>About Us</h2>
-            <p>
-                SKHighway Locator is developed and operated by
-                <strong>10223629 Saskatchewan Ltd.</strong>, a registered
-                corporation incorporated in Saskatchewan, Canada.
-            </p>
-            <p>
-                The company specializes in developing location-based mobile
-                applications that utilize official government geospatial data
-                to provide accurate, reliable, and user-friendly tools for
-                drivers and the general public.
-            </p>
-
-            <h3>Business Information</h3>
-            <p>
-                <strong>Legal Entity Name:</strong> 10223629 Saskatchewan Ltd.<br/>
-                <strong>Business Type:</strong> Corporation<br/>
-                <strong>Registered Location:</strong> Saskatchewan, Canada
-            </p>
-        </section>
-
-        <!-- License -->
-        <section id="data">
-            <h2>Data Source &amp; License</h2>
-            <p>
-                This app uses unaltered geospatial data licensed under the
-                Government of Saskatchewan Standard Unrestricted Use Data Licence
-                (Version 2.0).
-            </p>
-            <p>
-                “Contains information licensed under the Government of Saskatchewan
-                Standard Unrestricted Use Data Licence (Version 2.0).”
-            </p>
-        </section>
-
-        <!-- Privacy -->
-        <section id="privacy">
-            <h2>Privacy Policy</h2>
-            <p>
-                <a href="https://seanbuchko.github.io/SKHighway-Locator/privacy_policy.html" target="_blank" rel="noopener">
-                    View our Privacy Policy
-                </a>
-            </p>
-        </section>
-
-        <!-- Contact -->
-        <section id="contact" class="contact">
-            <h2>Contact Us</h2>
-            <p>
-                If you have any questions, reach out to us at:
-                <a href="mailto:skhighwaylocator@102223629.ca">skhighwaylocator@102223629.ca</a>
-            </p>
-        </section>
-    </div>
-
-    <footer>
-        <p>&copy; 2025 10223629 Saskatchewan Ltd. All Rights Reserved.</p>
-    </footer>
+<footer>
+<p>&copy; 2025 10223629 Saskatchewan Ltd.</p>
+</footer>
 </body>
 </html>
