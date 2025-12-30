@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>SKHighway Locator – PowerShell Script</title>
 
 <style>
@@ -11,12 +11,16 @@ body {
     margin: 0;
     background-color: #f9f9f9;
     color: #333;
+    line-height: 1.6;
 }
 header {
     background-color: #0057b7;
     color: #fff;
     padding: 2rem 1rem;
     text-align: center;
+}
+nav {
+    margin-top: 1rem;
 }
 nav a {
     display: inline-block;
@@ -44,7 +48,7 @@ h2, h3 {
     background: #eef4ff;
     border-left: 4px solid #0057b7;
     padding: 1rem;
-    margin: 1rem 0;
+    margin: 1.5rem 0;
 }
 pre {
     background: #f4f4f4;
@@ -56,8 +60,11 @@ pre {
     background: #0057b7;
     color: #fff;
     padding: 0.7rem 1.2rem;
-    border-radius: 5px;
     text-decoration: none;
+    border-radius: 5px;
+}
+.download-button:hover {
+    background: #003f7f;
 }
 footer {
     text-align: center;
@@ -72,9 +79,9 @@ footer {
 <header>
 <h1>PowerShell Photo CSV + KML Generator</h1>
 <nav>
-<a href="index.html">Home</a>
+<a href="https://102223629.ca/">Home</a>
 <a href="#overview">Overview</a>
-<a href="#workflow">General Workflow</a>
+<a href="#workflow">Workflow</a>
 <a href="#powershell">PowerShell Usage</a>
 </nav>
 </header>
@@ -82,47 +89,45 @@ footer {
 <div class="container">
 
 <section id="overview">
-<h2>What This Script Does</h2>
+<h2>Overview</h2>
 <p>
 This Windows PowerShell script scans a selected folder and all subfolders for JPEG photos and generates:
 </p>
 <ul>
-<li><strong>photo_metadata.csv</strong> – GPS, date taken, parsed title fields, and Excel hyperlinks</li>
-<li><strong>photo_map.kml</strong> – Google Earth placemarks with embedded images</li>
+<li><strong>photo_metadata.csv</strong> with GPS, date taken, parsed Title fields, and Excel hyperlinks</li>
+<li><strong>photo_map.kml</strong> for Google Earth with embedded images</li>
 </ul>
 
 <div class="note">
-<strong>Portable Output:</strong>
-All links use relative paths. You can move the entire project folder without breaking CSV links or KML images.
+<strong>Portable by design:</strong>
+All paths are relative. Move the folder anywhere and everything still works.
 </div>
 
-<p>
 <a class="download-button" href="https://102223629.ca/SKHighway%20Locator%20Powershell%20Script.ps1">
-Download Script (.ps1)
+Download PowerShell Script (.ps1)
 </a>
-</p>
 </section>
 
 <section id="workflow">
-<h2>General Workflow (Recommended)</h2>
+<h2>General Workflow</h2>
 <ol>
 <li>Take photos using the SKHighway Locator app</li>
-<li>Transfer photos to Windows without compressing them</li>
-<li>Ensure photos are JPEG (.jpg/.jpeg)</li>
-<li>Place all photos inside a single root folder (subfolders allowed)</li>
+<li>Transfer photos to Windows without compression</li>
+<li>Ensure photos are <strong>.jpg / .jpeg</strong></li>
+<li>Place all photos into one root folder (subfolders allowed)</li>
 <li>Run the PowerShell script and select the root folder</li>
-<li>Open the generated CSV in Excel and KML in Google Earth</li>
+<li>Open the CSV in Excel and the KML in Google Earth</li>
 </ol>
 </section>
 
 <section id="powershell">
-<h2>Running the Script in PowerShell</h2>
+<h2>Running the Script</h2>
 
 <h3>PowerShell Console</h3>
 <ol>
 <li>Download the script</li>
 <li>Right-click → Properties → Unblock</li>
-<li>Open PowerShell and run:</li>
+<li>Run the following:</li>
 </ol>
 
 <pre><code>Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
@@ -133,12 +138,12 @@ powershell -ExecutionPolicy Bypass -File "C:\Path\To\SKHighway Locator Powershel
 <ol>
 <li>Open PowerShell ISE</li>
 <li>File → Open → select the script</li>
-<li>Press <strong>F5</strong> to run</li>
-<li>Select your photo root folder when prompted</li>
+<li>Press <strong>F5</strong></li>
+<li>Select your photo root folder</li>
 </ol>
 
 <div class="note">
-If the folder picker does not appear, make sure ISE is the active window and press F5 again.
+If the folder dialog does not appear, ensure PowerShell ISE is the active window and press F5 again.
 </div>
 
 </section>
@@ -146,7 +151,7 @@ If the folder picker does not appear, make sure ISE is the active window and pre
 </div>
 
 <footer>
-<p>&copy; 2025 10223629 Saskatchewan Ltd.</p>
+<p>&copy; 2025 10223629 Saskatchewan Ltd. All Rights Reserved.</p>
 </footer>
 </body>
 </html>
