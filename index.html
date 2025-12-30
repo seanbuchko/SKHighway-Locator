@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>SKHighway Locator</title>
 
 <style>
@@ -11,12 +11,16 @@ body {
     margin: 0;
     background-color: #f9f9f9;
     color: #333;
+    line-height: 1.6;
 }
 header {
     background-color: #0057b7;
     color: #fff;
     padding: 2rem 1rem;
     text-align: center;
+}
+nav {
+    margin-top: 1rem;
 }
 nav a {
     display: inline-block;
@@ -45,9 +49,9 @@ h2 {
     background: #0057b7;
     color: #fff;
     padding: 0.7rem 1.2rem;
-    border-radius: 5px;
+    margin: 0.3rem 0;
     text-decoration: none;
-    margin: 0.3rem;
+    border-radius: 5px;
 }
 .download-button:hover {
     background: #003f7f;
@@ -68,8 +72,10 @@ footer {
     <nav>
         <a href="#download">Download</a>
         <a href="#features">Features</a>
-        <a href="powershell.html">PowerShell Script</a>
+        <a href="https://102223629.ca/powershell.html">PowerShell Script</a>
         <a href="#about">About</a>
+        <a href="#data">License</a>
+        <a href="#privacy">Privacy</a>
         <a href="#contact">Contact</a>
     </nav>
 </header>
@@ -78,8 +84,8 @@ footer {
 
 <section id="download">
 <h2>Download the App</h2>
-<a class="download-button" href="https://apps.apple.com/ca/app/skhighway-locator/id6748362557" target="_blank">Apple App Store</a>
-<a class="download-button" href="https://play.google.com/store/apps/details?id=com.seanbuchko.skhighway&hl=en_CA" target="_blank">Google Play Store</a>
+<a class="download-button" href="https://apps.apple.com/ca/app/skhighway-locator/id6748362557" target="_blank" rel="noopener">Apple App Store</a>
+<a class="download-button" href="https://play.google.com/store/apps/details?id=com.seanbuchko.skhighway&hl=en_CA" target="_blank" rel="noopener">Google Play Store</a>
 </section>
 
 <section id="features">
@@ -88,28 +94,50 @@ footer {
 <li>Real-time location tracking</li>
 <li>Nearest Saskatchewan highway identification</li>
 <li>Station and offset calculation</li>
-<li>Uses official provincial geospatial data</li>
+<li>Clean, intuitive interface</li>
+<li>Built with official provincial geospatial data</li>
 </ul>
 </section>
 
 <section>
 <h2>Photo Processing & Mapping</h2>
 <p>
-SKHighway Locator photos can be processed on Windows using our
+Photos captured with SKHighway Locator can be processed on Windows using our
 <strong>PowerShell Photo CSV + KML Generator</strong>.
 </p>
-<p>
-<a class="download-button" href="powershell.html">
+<a class="download-button" href="https://102223629.ca/powershell.html">
 View PowerShell Script Instructions
 </a>
-</p>
 </section>
 
 <section id="about">
 <h2>About Us</h2>
 <p>
-SKHighway Locator is developed by <strong>10223629 Saskatchewan Ltd.</strong>,
-a Saskatchewan-registered corporation specializing in location-based applications.
+SKHighway Locator is developed and operated by
+<strong>10223629 Saskatchewan Ltd.</strong>, a Saskatchewan-registered corporation.
+</p>
+<p>
+The company specializes in location-based applications using official government geospatial data.
+</p>
+</section>
+
+<section id="data">
+<h2>Data Source &amp; License</h2>
+<p>
+This app uses unaltered geospatial data licensed under the
+<strong>Government of Saskatchewan Standard Unrestricted Use Data Licence (Version 2.0)</strong>.
+</p>
+<p>
+“Contains information licensed under the Government of Saskatchewan Standard Unrestricted Use Data Licence (Version 2.0).”
+</p>
+</section>
+
+<section id="privacy">
+<h2>Privacy Policy</h2>
+<p>
+<a href="https://102223629.ca/privacy_policy.html" target="_blank" rel="noopener">
+View our Privacy Policy
+</a>
 </p>
 </section>
 
@@ -126,7 +154,7 @@ skhighwaylocator@102223629.ca
 </div>
 
 <footer>
-<p>&copy; 2025 10223629 Saskatchewan Ltd.</p>
+<p>&copy; 2025 10223629 Saskatchewan Ltd. All Rights Reserved.</p>
 </footer>
 </body>
 </html>
