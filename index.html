@@ -2,8 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>SKHighway Locator</title>
     <style>
         body {
@@ -54,6 +54,10 @@
             color: #0057b7;
             margin-top: 2rem;
         }
+        h3 {
+            color: #0057b7;
+            margin-top: 1.2rem;
+        }
         a.download-button {
             display: inline-block;
             background-color: #0057b7;
@@ -75,6 +79,9 @@
         }
         ul {
             list-style-type: disc;
+            padding-left: 1.5rem;
+        }
+        ol {
             padding-left: 1.5rem;
         }
         .contact a {
@@ -111,18 +118,21 @@
             <a class="button" href="#download">Download</a>
             <a class="button" href="#features">Features</a>
             <a class="button" href="#powershell">PowerShell Script</a>
+            <a class="button" href="#powershell-ise">PowerShell ISE</a>
             <a class="button" href="#about">About Us</a>
             <a class="button" href="#contact">Contact Us</a>
         </nav>
     </header>
 
     <div class="container">
+        <!-- App store links -->
         <section id="download">
             <h2>Download the App</h2>
             <a class="download-button" href="https://apps.apple.com/ca/app/skhighway-locator/id6748362557" target="_blank" rel="noopener">Apple App Store</a>
             <a class="download-button" href="https://play.google.com/store/apps/details?id=com.seanbuchko.skhighway&hl=en_CA" target="_blank" rel="noopener">Google Play Store</a>
         </section>
 
+        <!-- Feature list -->
         <section id="features">
             <h2>Features</h2>
             <ul>
@@ -134,7 +144,7 @@
             </ul>
         </section>
 
-        <!-- New: PowerShell Script section -->
+        <!-- Script description + console instructions -->
         <section id="powershell">
             <h2>PowerShell Script: Photo CSV + KML Generator</h2>
             <p>
@@ -147,43 +157,80 @@
             </ul>
 
             <div class="note">
-                <strong>Relative paths supported:</strong> You can move the entire root folder (photos + CSV + KML) anywhere—links and images will continue to work.
+                <strong>Portable by design:</strong> The CSV hyperlinks and KML image references use relative paths. You can move the entire root folder (photos + CSV + KML) anywhere—links and images will still work.
             </div>
 
             <p>
-                <a class="download-button" href="https://102223629.ca/SKHighway%20Locator%20Powershell%20Script.ps1" download>
-                    Download PowerShell Script
-                </a>
+                <a class="download-button" href="https://102223629.ca/SKHighway%20Locator%20Powershell%20Script.ps1" download>Download PowerShell Script (.ps1)</a>
             </p>
 
-            <h3>How to Use (Windows)</h3>
+            <h3>How to Run (PowerShell Console)</h3>
             <ol>
-                <li>Click the <strong>Download PowerShell Script</strong> button above and save the file (e.g., to your Desktop).</li>
-                <li>Right‑click the downloaded file → <strong>Properties</strong> → check <strong>Unblock</strong> (if present) → <strong>OK</strong>.</li>
-                <li>Open <strong>Windows PowerShell</strong> (or <strong>PowerShell</strong> in Windows) and run:
+                <li>Download and save the script file (e.g., to your Desktop).</li>
+                <li>Right‑click the file → <strong>Properties</strong> → check <strong>Unblock</strong> (if present) → <strong>OK</strong>.</li>
+                <li>Open <strong>Windows PowerShell</strong> (or <strong>PowerShell</strong>) and run:
                     <pre><code>Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 Unblock-File -Path "C:\Path\To\SKHighway Locator Powershell Script.ps1"
 powershell -ExecutionPolicy Bypass -File "C:\Path\To\SKHighway Locator Powershell Script.ps1"</code></pre>
                 </li>
                 <li>When prompted, select the <strong>root folder</strong> containing your photos. The script will search subfolders automatically.</li>
-                <li>Open the generated <strong>photo_metadata.csv</strong> in Excel (double‑click to allow formulas to evaluate) and load <strong>photo_map.kml</strong> in Google Earth.</li>
+                <li>Open <strong>photo_metadata.csv</strong> in Excel and <strong>photo_map.kml</strong> in Google Earth.</li>
             </ol>
-
-            <h3>Requirements</h3>
-            <ul>
-                <li>Windows 10/11 with PowerShell (5.1 or 7.x on Windows)</li>
-                <li>JPEG photos with EXIF GPS for map pins (non‑GPS photos still appear in CSV)</li>
-                <li>Optional Title metadata in the format: <code>Road: ..., Station: ..., Offset: ..., Accuracy: ..., Note: ...</code></li>
-            </ul>
-
-            <h3>Notes</h3>
-            <ul>
-                <li>CSV hyperlinks are relative (e.g., <code>Subfolder\IMG_0005.JPG</code>) and work when opened directly in Excel.</li>
-                <li>KML image references are relative (e.g., <code>Subfolder/IMG_0005.JPG</code>) so photos display in Google Earth.</li>
-                <li>The script only scans <strong>.jpg / .jpeg</strong>. If you need <strong>.png</strong> or others, contact us.</li>
-            </ul>
         </section>
 
+        <!-- NEW: PowerShell ISE instructions -->
+        <section id="powershell-ise">
+            <h2>How to Run with PowerShell ISE</h2>
+            <p>PowerShell ISE provides a GUI for editing and running scripts. Follow these steps:</p>
+            <ol>
+                <li>Download the script:
+                    <br/>
+                    <a class="download-button" href="https://102223629.ca/SKHighway%20Locator%20Powershell%20Script.ps1" download>Download PowerShell Script (.ps1)</a>
+                </li>
+                <li>Unblock the file (Windows may mark downloaded scripts as blocked):
+                    <ul>
+                        <li>Right‑click the file → <strong>Properties</strong> → check <strong>Unblock</strong> → <strong>OK</strong>.</li>
+                        <li>Or run in PowerShell: <code>Unblock-File -Path "C:\Path\To\SKHighway Locator Powershell Script.ps1"</code></li>
+                    </ul>
+                </li>
+                <li>Open <strong>PowerShell ISE</strong>:
+                    <ul>
+                        <li>Press <strong>Win</strong>, type <strong>PowerShell ISE</strong>, and open the app.</li>
+                        <li>(Optional) Run ISE as Administrator if you need to change the execution policy for all users.</li>
+                    </ul>
+                </li>
+                <li>Ensure scripts can run (recommended setting for your user):
+                    <pre><code>Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned</code></pre>
+                </li>
+                <li>Load the script into ISE:
+                    <ul>
+                        <li>File → <strong>Open</strong> → select <em>SKHighway Locator Powershell Script.ps1</em>.</li>
+                    </ul>
+                </li>
+                <li>Run the script:
+                    <ul>
+                        <li>Press <strong>F5</strong> or click <strong>Run Script</strong>.</li>
+                        <li>A folder picker dialog will appear <strong>on top</strong>. You can <strong>paste a path</strong> or browse to the folder to use as the root.</li>
+                    </ul>
+                </li>
+                <li>Results:
+                    <ul>
+                        <li>The script scans the selected folder and all subfolders for <strong>.jpg / .jpeg</strong> files.</li>
+                        <li>It creates <strong>photo_metadata.csv</strong> and <strong>photo_map.kml</strong> in the selected root folder.</li>
+                        <li>Open the CSV in Excel (double‑click to allow formulas to evaluate) and load the KML in Google Earth.</li>
+                    </ul>
+                </li>
+            </ol>
+            <div class="note">
+                <strong>Troubleshooting ISE:</strong>
+                <ul>
+                    <li>If the folder dialog doesn’t appear, make sure ISE is the active window and press <strong>F5</strong> again. The script forces the dialog to the front with a small “TopMost” owner window.</li>
+                    <li>If you see an execution policy error, re‑run: <code>Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned</code> in ISE’s console pane.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- About -->
         <section id="about">
             <h2>About Us</h2>
             <p>
@@ -200,12 +247,13 @@ powershell -ExecutionPolicy Bypass -File "C:\Path\To\SKHighway Locator Powershel
 
             <h3>Business Information</h3>
             <p>
-                <strong>Legal Entity Name:</strong> 10223629 Saskatchewan Ltd.<br>
-                <strong>Business Type:</strong> Corporation<br>
+                <strong>Legal Entity Name:</strong> 10223629 Saskatchewan Ltd.<br/>
+                <strong>Business Type:</strong> Corporation<br/>
                 <strong>Registered Location:</strong> Saskatchewan, Canada
             </p>
         </section>
 
+        <!-- License -->
         <section id="data">
             <h2>Data Source &amp; License</h2>
             <p>
@@ -219,6 +267,7 @@ powershell -ExecutionPolicy Bypass -File "C:\Path\To\SKHighway Locator Powershel
             </p>
         </section>
 
+        <!-- Privacy -->
         <section id="privacy">
             <h2>Privacy Policy</h2>
             <p>
@@ -228,20 +277,15 @@ powershell -ExecutionPolicy Bypass -File "C:\Path\To\SKHighway Locator Powershel
             </p>
         </section>
 
+        <!-- Contact -->
         <section id="contact" class="contact">
             <h2>Contact Us</h2>
             <p>
                 If you have any questions, reach out to us at:
-                <a href="mailto:skhighwaylocator@102223629.ca">
-                    skhighwaylocator@102223629.ca
-                </a>
+                <a href="mailto:skhighwaylocator@102223629.ca">skhighwaylocator@102223629.ca</a>
             </p>
         </section>
     </div>
 
     <footer>
-        <p>&copy; 2025 10223629 Saskatchewan Ltd. All Rights Reserved.</p>
-    </footer>
-</body>
-</html>
-``
+        <p>&copy; 2025 10223629 Saskatchewan Ltd
