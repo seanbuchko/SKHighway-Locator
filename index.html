@@ -119,7 +119,10 @@
             <a class="button" href="#features">Features</a>
             <a class="button" href="#powershell">PowerShell Script</a>
             <a class="button" href="#powershell-ise">PowerShell ISE</a>
+            <a class="button" href="#workflow">Using SKHighway Locator Photos</a>
             <a class="button" href="#about">About Us</a>
+            <a class="button" href="#data">License</a>
+            <a class="button" href="#privacy">Privacy</a>
             <a class="button" href="#contact">Contact Us</a>
         </nav>
     </header>
@@ -152,7 +155,7 @@
                 and title metadata, and generates:
             </p>
             <ul>
-                <li><strong>photo_metadata.csv</strong> — includes columns for <em>FileName</em>, <em>PhotoFolder</em> (relative), <em>DateTaken</em>, <em>Latitude</em>, <em>Longitude</em>, and labeled fields parsed from the photo <em>Title</em> (<code>Road</code>, <code>Station</code>, <code>Offset</code>, <code>Accuracy</code>, <code>Note</code>), plus an Excel-friendly hyperlink (<code>=HYPERLINK("...","Open Photo")</code>).</li>
+                <li><strong>photo_metadata.csv</strong> — columns for <em>FileName</em>, <em>PhotoFolder</em> (relative), <em>DateTaken</em>, <em>Latitude</em>, <em>Longitude</em>, and labeled fields parsed from the photo <em>Title</em> (<code>Road</code>, <code>Station</code>, <code>Offset</code>, <code>Accuracy</code>, <code>Note</code>), plus an Excel-friendly hyperlink (<code>=HYPERLINK("...","Open Photo")</code>).</li>
                 <li><strong>photo_map.kml</strong> — a Google Earth placemark file where each pin uses the photo’s GPS coordinates and shows the image and details in the description using <em>relative paths</em>.</li>
             </ul>
 
@@ -161,7 +164,7 @@
             </div>
 
             <p>
-                <a class="download-button" href="https://102223629.ca/SKHighway%20Locator%20Powershell%20Script.ps1" download>Download PowerShell Script (.ps1)</a>
+                <a class="download-button" href="https://102223629.ca/SKHighway%20Locator%20Powershell%20Script.ps1" target="_blank" rel="noopener">Download PowerShell Script (.ps1)</a>
             </p>
 
             <h3>How to Run (PowerShell Console)</h3>
@@ -178,114 +181,10 @@ powershell -ExecutionPolicy Bypass -File "C:\Path\To\SKHighway Locator Powershel
             </ol>
         </section>
 
-        <!-- NEW: PowerShell ISE instructions -->
+        <!-- PowerShell ISE instructions -->
         <section id="powershell-ise">
             <h2>How to Run with PowerShell ISE</h2>
             <p>PowerShell ISE provides a GUI for editing and running scripts. Follow these steps:</p>
             <ol>
                 <li>Download the script:
                     <br/>
-                    <a class="download-button" href="https://102223629.ca/SKHighway%20Locator%20Powershell%20Script.ps1" download>Download PowerShell Script (.ps1)</a>
-                </li>
-                <li>Unblock the file (Windows may mark downloaded scripts as blocked):
-                    <ul>
-                        <li>Right‑click the file → <strong>Properties</strong> → check <strong>Unblock</strong> → <strong>OK</strong>.</li>
-                        <li>Or run in PowerShell: <code>Unblock-File -Path "C:\Path\To\SKHighway Locator Powershell Script.ps1"</code></li>
-                    </ul>
-                </li>
-                <li>Open <strong>PowerShell ISE</strong>:
-                    <ul>
-                        <li>Press <strong>Win</strong>, type <strong>PowerShell ISE</strong>, and open the app.</li>
-                        <li>(Optional) Run ISE as Administrator if you need to change the execution policy for all users.</li>
-                    </ul>
-                </li>
-                <li>Ensure scripts can run (recommended setting for your user):
-                    <pre><code>Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned</code></pre>
-                </li>
-                <li>Load the script into ISE:
-                    <ul>
-                        <li>File → <strong>Open</strong> → select <em>SKHighway Locator Powershell Script.ps1</em>.</li>
-                    </ul>
-                </li>
-                <li>Run the script:
-                    <ul>
-                        <li>Press <strong>F5</strong> or click <strong>Run Script</strong>.</li>
-                        <li>A folder picker dialog will appear <strong>on top</strong>. You can <strong>paste a path</strong> or browse to the folder to use as the root.</li>
-                    </ul>
-                </li>
-                <li>Results:
-                    <ul>
-                        <li>The script scans the selected folder and all subfolders for <strong>.jpg / .jpeg</strong> files.</li>
-                        <li>It creates <strong>photo_metadata.csv</strong> and <strong>photo_map.kml</strong> in the selected root folder.</li>
-                        <li>Open the CSV in Excel (double‑click to allow formulas to evaluate) and load the KML in Google Earth.</li>
-                    </ul>
-                </li>
-            </ol>
-            <div class="note">
-                <strong>Troubleshooting ISE:</strong>
-                <ul>
-                    <li>If the folder dialog doesn’t appear, make sure ISE is the active window and press <strong>F5</strong> again. The script forces the dialog to the front with a small “TopMost” owner window.</li>
-                    <li>If you see an execution policy error, re‑run: <code>Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned</code> in ISE’s console pane.</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- About -->
-        <section id="about">
-            <h2>About Us</h2>
-            <p>
-                SKHighway Locator is developed and operated by
-                <strong>10223629 Saskatchewan Ltd.</strong>, a registered
-                corporation incorporated in Saskatchewan, Canada.
-            </p>
-            <p>
-                The company specializes in developing location-based mobile
-                applications that utilize official government geospatial data
-                to provide accurate, reliable, and user-friendly tools for
-                drivers and the general public.
-            </p>
-
-            <h3>Business Information</h3>
-            <p>
-                <strong>Legal Entity Name:</strong> 10223629 Saskatchewan Ltd.<br/>
-                <strong>Business Type:</strong> Corporation<br/>
-                <strong>Registered Location:</strong> Saskatchewan, Canada
-            </p>
-        </section>
-
-        <!-- License -->
-        <section id="data">
-            <h2>Data Source &amp; License</h2>
-            <p>
-                This app uses unaltered geospatial data licensed under the
-                Government of Saskatchewan Standard Unrestricted Use Data Licence
-                (Version 2.0).
-            </p>
-            <p>
-                “Contains information licensed under the Government of Saskatchewan
-                Standard Unrestricted Use Data Licence (Version 2.0).”
-            </p>
-        </section>
-
-        <!-- Privacy -->
-        <section id="privacy">
-            <h2>Privacy Policy</h2>
-            <p>
-                <a href="https://seanbuchko.github.io/SKHighway-Locator/privacy_policy.html" target="_blank" rel="noopener">
-                    View our Privacy Policy
-                </a>
-            </p>
-        </section>
-
-        <!-- Contact -->
-        <section id="contact" class="contact">
-            <h2>Contact Us</h2>
-            <p>
-                If you have any questions, reach out to us at:
-                <a href="mailto:skhighwaylocator@102223629.ca">skhighwaylocator@102223629.ca</a>
-            </p>
-        </section>
-    </div>
-
-    <footer>
-        <p>&copy; 2025 10223629 Saskatchewan Ltd
