@@ -1,4 +1,4 @@
-
+﻿
 <# 
     Photo CSV + KML generator (recursive, relative paths, TopMost folder picker with "new UI")
     - Select a root folder (dialog appears in front of ISE; you can paste a path or browse)
