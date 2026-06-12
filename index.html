@@ -1,160 +1,454 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>SKHighway Locator</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SKHighway Locator | Saskatchewan Highway Identification</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f9f9f9;
-    color: #333;
-    line-height: 1.6;
+
+:root{
+    --primary:#0057b7;
+    --primary-dark:#003f7f;
+    --bg:#f5f7fa;
+    --card:#ffffff;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --border:#e5e7eb;
 }
-header {
-    background-color: #0057b7;
-    color: #fff;
-    padding: 2rem 1rem;
-    text-align: center;
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
-nav {
-    margin-top: 1rem;
+
+html{
+    scroll-behavior:smooth;
 }
-nav a {
-    display: inline-block;
-    background: #fff;
-    color: #0057b7;
-    padding: 0.5rem 1rem;
-    margin: 0.3rem;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
+
+body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
 }
-nav a:hover {
-    background: #003f7f;
-    color: #fff;
+
+/* Navigation */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
 }
-.container {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+
+.nav-container{
+    max-width:1200px;
+    margin:auto;
+    padding:1rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
-h2 {
-    color: #0057b7;
+
+.logo{
+    font-size:1.25rem;
+    font-weight:800;
+    color:var(--primary);
 }
-.download-button {
-    display: inline-block;
-    background: #0057b7;
-    color: #fff;
-    padding: 0.7rem 1.2rem;
-    margin: 0.3rem 0;
-    text-decoration: none;
-    border-radius: 5px;
+
+nav{
+    display:flex;
+    gap:1rem;
+    flex-wrap:wrap;
 }
-.download-button:hover {
-    background: #003f7f;
+
+nav a{
+    text-decoration:none;
+    color:var(--text);
+    font-weight:500;
+    transition:.25s;
 }
-footer {
-    text-align: center;
-    padding: 2rem;
-    background: #eaeaea;
-    margin-top: 3rem;
+
+nav a:hover{
+    color:var(--primary);
 }
+
+/* Hero */
+
+.hero{
+    background:
+        linear-gradient(
+            135deg,
+            #0057b7 0%,
+            #003f7f 100%);
+    color:white;
+    padding:6rem 1rem;
+    text-align:center;
+}
+
+.hero-content{
+    max-width:900px;
+    margin:auto;
+}
+
+.hero h1{
+    font-size:clamp(2.5rem,6vw,4.5rem);
+    font-weight:800;
+    margin-bottom:1rem;
+}
+
+.hero p{
+    font-size:1.2rem;
+    opacity:.95;
+    max-width:700px;
+    margin:auto;
+}
+
+.hero-buttons{
+    margin-top:2rem;
+    display:flex;
+    justify-content:center;
+    gap:1rem;
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-block;
+    padding:.9rem 1.5rem;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:600;
+    transition:.25s;
+}
+
+.btn-primary{
+    background:white;
+    color:var(--primary);
+}
+
+.btn-primary:hover{
+    transform:translateY(-2px);
+}
+
+.btn-outline{
+    border:1px solid rgba(255,255,255,.4);
+    color:white;
+}
+
+.btn-outline:hover{
+    background:rgba(255,255,255,.1);
+}
+
+/* Main */
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:4rem 1rem;
+}
+
+.section{
+    margin-bottom:3rem;
+}
+
+.section-title{
+    font-size:2rem;
+    margin-bottom:1rem;
+    color:var(--primary);
+}
+
+/* Cards */
+
+.card{
+    background:var(--card);
+    border-radius:16px;
+    padding:2rem;
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.05);
+}
+
+.features-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(250px,1fr));
+    gap:1.5rem;
+}
+
+.feature-card{
+    background:white;
+    padding:1.5rem;
+    border-radius:14px;
+    border:1px solid var(--border);
+    transition:.25s;
+}
+
+.feature-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
+
+.feature-card h3{
+    margin-bottom:.5rem;
+    color:var(--primary);
+}
+
+/* Download buttons */
+
+.store-buttons{
+    display:flex;
+    gap:1rem;
+    flex-wrap:wrap;
+}
+
+.store-button{
+    background:var(--primary);
+    color:white;
+    text-decoration:none;
+    padding:1rem 1.5rem;
+    border-radius:10px;
+    font-weight:600;
+    transition:.25s;
+}
+
+.store-button:hover{
+    background:var(--primary-dark);
+}
+
+/* Footer */
+
+footer{
+    background:#111827;
+    color:#d1d5db;
+    text-align:center;
+    padding:2rem;
+    margin-top:4rem;
+}
+
+footer a{
+    color:white;
+    text-decoration:none;
+}
+
+@media(max-width:768px){
+
+    .nav-container{
+        flex-direction:column;
+        gap:1rem;
+    }
+
+    nav{
+        justify-content:center;
+    }
+
+    .hero{
+        padding:4rem 1rem;
+    }
+
+}
+
 </style>
+
 </head>
 
 <body>
+
 <header>
-    <h1>SKHighway Locator</h1>
-    <p>Developed by 102223629 Saskatchewan Ltd.</p>
+    <div class="nav-container">
+        <div class="logo">SKHighway Locator</div>
+
+```
     <nav>
         <a href="#download">Download</a>
         <a href="#features">Features</a>
-        <a href="https://102223629.ca/powershell.html">PowerShell Script</a>
         <a href="#about">About</a>
         <a href="#data">License</a>
         <a href="#privacy">Privacy</a>
         <a href="#contact">Contact</a>
     </nav>
+</div>
+```
+
 </header>
+
+<section class="hero">
+    <div class="hero-content">
+
+```
+    <h1>Locate Saskatchewan Highways with Precision</h1>
+
+    <p>
+        Instantly identify the nearest Saskatchewan highway,
+        calculate stationing and offsets, and capture accurate
+        location data using official provincial geospatial datasets.
+    </p>
+
+    <div class="hero-buttons">
+        <a class="btn btn-primary" href="#download">Download App</a>
+        <a class="btn btn-outline"
+           href="https://102223629.ca/powershell.html">
+           PowerShell Tools
+        </a>
+    </div>
+
+</div>
+```
+
+</section>
 
 <div class="container">
 
-<section id="download">
-<h2>Download the App</h2>
-<a class="download-button" href="https://apps.apple.com/ca/app/skhighway-locator/id6748362557" target="_blank" rel="noopener">Apple App Store</a>
-<a class="download-button" href="https://play.google.com/store/apps/details?id=com.seanbuchko.skhighway&hl=en_CA" target="_blank" rel="noopener">Google Play Store</a>
+<section id="download" class="section">
+    <div class="card">
+        <h2 class="section-title">Download SKHighway Locator</h2>
+
+```
+    <div class="store-buttons">
+        <a class="store-button"
+           href="https://apps.apple.com/ca/app/skhighway-locator/id6748362557">
+           Apple App Store
+        </a>
+
+        <a class="store-button"
+           href="https://play.google.com/store/apps/details?id=com.seanbuchko.skhighway">
+           Google Play Store
+        </a>
+    </div>
+</div>
+```
+
 </section>
 
-<section id="features">
-<h2>Features</h2>
-<ul>
-<li>Real-time location tracking</li>
-<li>Nearest Saskatchewan highway identification</li>
-<li>Station and offset calculation</li>
-<li>Clean, intuitive interface</li>
-<li>Built with official provincial geospatial data</li>
-</ul>
+<section id="features" class="section">
+    <h2 class="section-title">Features</h2>
+
+```
+<div class="features-grid">
+
+    <div class="feature-card">
+        <h3>Real-Time GPS Positioning</h3>
+        <p>Instantly determine your location in the field.</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>Highway Identification</h3>
+        <p>Find the nearest Saskatchewan highway segment.</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>Station & Offset</h3>
+        <p>Accurate engineering-style station calculations.</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>Government Data</h3>
+        <p>Powered by official Saskatchewan geospatial datasets.</p>
+    </div>
+
+</div>
+```
+
 </section>
 
-<section>
-<h2>Photo Processing & Mapping</h2>
-<p>
-Photos captured with SKHighway Locator can be processed on Windows using our
-<strong>PowerShell Photo CSV + KML Generator</strong>.
-</p>
-<a class="download-button" href="https://102223629.ca/powershell.html">
-View PowerShell Script Instructions
-</a>
+<section class="section">
+    <div class="card">
+        <h2 class="section-title">Photo Processing & Mapping</h2>
+
+```
+    <p>
+        Generate CSV and KML outputs from photos captured in the app
+        using our Windows PowerShell processing tools.
+    </p>
+
+    <br>
+
+    <a class="store-button"
+       href="https://102223629.ca/powershell.html">
+        View PowerShell Instructions
+    </a>
+</div>
+```
+
 </section>
 
-<section id="about">
-<h2>About Us</h2>
-<p>
-SKHighway Locator is developed and operated by
-<strong>102223629 Saskatchewan Ltd.</strong>, a Saskatchewan-registered corporation.
-</p>
-<p>
-The company specializes in location-based applications using official government geospatial data.
-</p>
+<section id="about" class="section">
+    <div class="card">
+        <h2 class="section-title">About</h2>
+
+```
+    <p>
+        SKHighway Locator is developed and operated by
+        <strong>102223629 Saskatchewan Ltd.</strong>
+    </p>
+
+    <p>
+        We build location-based software solutions using
+        authoritative government geospatial data to support
+        professionals working in transportation, surveying,
+        engineering, and infrastructure management.
+    </p>
+</div>
+```
+
 </section>
 
-<section id="data">
-<h2>Data Source &amp; License</h2>
-<p>
-This app uses unaltered geospatial data licensed under the
-<strong>Government of Saskatchewan Standard Unrestricted Use Data Licence (Version 2.0)</strong>.
-</p>
-<p>
-“Contains information licensed under the Government of Saskatchewan Standard Unrestricted Use Data Licence (Version 2.0).”
-</p>
+<section id="data" class="section">
+    <div class="card">
+        <h2 class="section-title">Data Licensing</h2>
+
+```
+    <p>
+        Contains information licensed under the Government of
+        Saskatchewan Standard Unrestricted Use Data Licence (Version 2.0).
+    </p>
+</div>
+```
+
 </section>
 
-<section id="privacy">
-<h2>Privacy Policy</h2>
-<p>
-<a href="https://102223629.ca/privacy_policy.html" target="_blank" rel="noopener">
-View our Privacy Policy
-</a>
-</p>
+<section id="privacy" class="section">
+    <div class="card">
+        <h2 class="section-title">Privacy Policy</h2>
+
+```
+    <a href="https://102223629.ca/privacy_policy.html">
+        View Privacy Policy
+    </a>
+</div>
+```
+
 </section>
 
-<section id="contact">
-<h2>Contact</h2>
-<p>
-Email:
-<a href="mailto:skhighwaylocator@102223629.ca">
-skhighwaylocator@102223629.ca
-</a>
-</p>
+<section id="contact" class="section">
+    <div class="card">
+        <h2 class="section-title">Contact</h2>
+
+```
+    <p>
+        Email:
+        <a href="mailto:skhighwaylocator@102223629.ca">
+            skhighwaylocator@102223629.ca
+        </a>
+    </p>
+</div>
+```
+
 </section>
 
 </div>
 
 <footer>
-<p>&copy; 2025 102223629 Saskatchewan Ltd. All Rights Reserved.</p>
+    <p>
+        © 2025 102223629 Saskatchewan Ltd. All Rights Reserved.
+    </p>
 </footer>
+
 </body>
 </html>
