@@ -1,4 +1,4 @@
-﻿
+
 <# 
     Photo CSV + KML generator (recursive, relative paths, TopMost folder picker with "new UI")
     - Select a root folder (dialog appears in front of ISE; you can paste a path or browse)
@@ -50,6 +50,8 @@ if (-not $selectedFolder -or -not (Test-Path $selectedFolder)) {
     Write-Host "No folder selected. Exiting."
     exit
 }
+
+$allPhotoData = @()
 
 $folderName = Split-Path $selectedFolder -Leaf
 $csvPath = Join-Path $selectedFolder "photo_metadata.csv"
@@ -124,21 +126,54 @@ function Parse-TitleFields {
     param ([string]$title)
 
     $fields = @{
-        Road     = ""
-        Station  = ""
-        Offset   = ""
-        Accuracy = ""
-        Note     = ""
+        Road         = ""
+        Station      = ""
+        Offset       = ""
+        Accuracy     = ""
+        Note         = ""
+        Looking      = ""
+        MetadataLat  = $null
+        MetadataLong = $null
     }
 
-    if ([string]::IsNullOrWhiteSpace($title)) { return $fields }
+    if ([string]::IsNullOrWhiteSpace($title)) {
+        return $fields
+    }
 
-    $segments = ($title -split ',') | ForEach-Object { $_.Trim() } | Where-Object { $_ -ne "" }
+    $segments = ($title -split ',') |
+        ForEach-Object { $_.Trim() } |
+        Where-Object { $_ -ne "" }
+
     foreach ($seg in $segments) {
-        if ($seg -match '^\s*(?<key>Road|Station|Offset|Accuracy|Note)\s*:\s*(?<val>.+?)\s*$') {
-            $fields[$matches['key']] = $matches['val'].Trim()
+
+if ($seg -match '^\s*(?<key>Road|Station|Offset|Accuracy|Note)(?<star>\*)?\s*:\s*(?<val>.+?)\s*$') {
+
+    $value = $matches['val'].Trim()
+
+    if ($matches['star']) {
+        $value += ' *'
+    }
+
+    $fields[$matches['key']] = $value
+    continue
+}
+
+        if ($seg -match '^\s*Looking\s+(?<dir>.+?)\s*$') {
+            $fields["Looking"] = $matches['dir'].Trim()
+            continue
+        }
+
+        if ($seg -match '^\s*Lat\s*:\s*(?<val>-?\d+(\.\d+)?)\s*$') {
+            $fields["MetadataLat"] = [double]$matches['val']
+            continue
+        }
+
+        if ($seg -match '^\s*Long\s*:\s*(?<val>-?\d+(\.\d+)?)\s*$') {
+            $fields["MetadataLong"] = [double]$matches['val']
+            continue
         }
     }
+
     return $fields
 }
 
@@ -160,9 +195,31 @@ function Get-RelativePath {
 # -----------------------------
 $photoData = @()
 
-$photos = Get-ChildItem -Path $selectedFolder -File -Recurse | Where-Object {
-    $_.Extension -match '\.jpe?g$'
-}
+$folders = @(
+    Get-Item $selectedFolder
+    Get-ChildItem $selectedFolder -Directory -Recurse
+)
+
+foreach ($currentFolder in $folders) {
+
+    $photos = Get-ChildItem $currentFolder.FullName -File |
+        Where-Object { $_.Extension -match '\.jpe?g$' }
+
+    if ($photos.Count -eq 0) {
+        continue
+    }
+
+    $csvPath = Join-Path $currentFolder.FullName "photo_metadata.csv"
+    $kmlPath = Join-Path $currentFolder.FullName "photo_map.kml"
+
+    $photoData = @()
+
+    # existing photo processing code here
+
+    # existing CSV export here
+
+    # existing KML generation here
+
 
 foreach ($file in $photos) {
     $metadata = Get-FileMetadata $file.FullName
@@ -182,16 +239,40 @@ foreach ($file in $photos) {
     if (-not $dateTaken -and $metadata["Date created"]) { $dateTaken = $metadata["Date created"] }
 
     # Coordinates
-    $latitude  = if ($coords) { $coords["Latitude"] }  else { $null }
-    $longitude = if ($coords) { $coords["Longitude"] } else { $null }
+if ($coords) {
+    $latitude  = $coords["Latitude"]
+    $longitude = $coords["Longitude"]
+}
+elseif ($labelFields["MetadataLat"] -ne $null -and
+        $labelFields["MetadataLong"] -ne $null) {
+
+    $latitude  = [double]$labelFields["MetadataLat"]
+    $longitude = [double]$labelFields["MetadataLong"]
+}
+else {
+    $latitude  = $null
+    $longitude = $null
+}
 
     # Relative paths (Windows for Excel; URL-style for KML)
-    $relUrl     = Get-RelativePath -baseFolder $selectedFolder -fullPath $file.FullName   # e.g., Sub/IMG_0001.jpg
-    $relForExcel = ($relUrl -replace '/', '\')                                            # backslashes for Excel on Windows
-    $relForKml   = ($relUrl -replace '\\', '/')                                           # forward slashes for KML/URLs
+
+$relUrl = Get-RelativePath `
+    -baseFolder $selectedFolder `
+    -fullPath $file.FullName
+
+$relForExcelFolder = $file.Name
+$relForExcelMaster = ($relUrl -replace '/', '\')
+
+$relForKml = $file.Name
 
     # Photo folder (relative directory). If photo is in root, show "."
-    $photoFolderRel = Split-Path -Path $relForExcel -Parent
+$photoFolderRel = Get-RelativePath `
+    -baseFolder $selectedFolder `
+    -fullPath $currentFolder.FullName
+
+if ([string]::IsNullOrWhiteSpace($photoFolderRel)) {
+    $photoFolderRel = "."
+}
     if ([string]::IsNullOrWhiteSpace($photoFolderRel)) { $photoFolderRel = "." }
 
     # Excel hyperlink formula (no backticks): =HYPERLINK("Rel\Path.jpg","Open Photo")
@@ -206,24 +287,31 @@ foreach ($file in $photos) {
         Latitude    = $latitude
         Longitude   = $longitude
 
-        Road        = $labelFields["Road"]
-        Station     = $labelFields["Station"]
-        Offset      = $labelFields["Offset"]
-        Accuracy    = $labelFields["Accuracy"]
-        Note        = $labelFields["Note"]
+Road        = $labelFields["Road"]
+Station     = $labelFields["Station"]
+Offset      = $labelFields["Offset"]
+Accuracy    = $labelFields["Accuracy"]
+Looking     = $labelFields["Looking"]
+Note        = $labelFields["Note"]
 
-        PhotoLink   = $photoLinkFormula
+PhotoLinkFolder = ('=HYPERLINK("{0}","Open Photo")' -f $relForExcelFolder)
+PhotoLinkMaster = ('=HYPERLINK("{0}","Open Photo")' -f $relForExcelMaster)
         KmlSrcPath  = $relForKml   # internal use when building KML
+        KmlSrcPathMaster = ($relUrl -replace '/', '\')
     }
 
     $photoData += New-Object PSObject -Property $obj
+    $allPhotoData += New-Object PSObject -Property $obj
 }
 
 # -----------------------------
 # Export CSV
 # -----------------------------
 $photoData |
-    Select-Object FileName,PhotoFolder,Subject,DateTaken,Latitude,Longitude,Road,Station,Offset,Accuracy,Note,PhotoLink |
+Select-Object FileName,PhotoFolder,Subject,DateTaken,
+Latitude,Longitude,
+Road,Station,Offset,Accuracy,Looking,Note,
+PhotoLinkFolder |
     Export-Csv -Path $csvPath -NoTypeInformation -Encoding UTF8
 Write-Host ("CSV file created at: {0}" -f $csvPath)
 
@@ -250,7 +338,7 @@ $kml = @(
 )
 
 foreach ($p in $photoData) {
-    if ($p.Latitude -and $p.Longitude) {
+if ($null -ne $p.Latitude -and $null -ne $p.Longitude) {
         # Placemark name preference: Note > Road+Station > Road > FileName
         $placemarkName =
             if ($p.Note) {
@@ -265,10 +353,18 @@ foreach ($p in $photoData) {
 
         # Description text block (use Environment.NewLine for reliability)
         $nl = [Environment]::NewLine
-        $desc = (
-            "File: {0}{7}Folder: {1}{7}Road: {2}{7}Station: {3}{7}Offset: {4}{7}Accuracy: {5}{7}Note: {6}" `
-            -f $p.FileName, $p.PhotoFolder, $p.Road, $p.Station, $p.Offset, $p.Accuracy, $p.Note, $nl
-        )
+$desc = (
+    "File: {0}{8}Folder: {1}{8}Road: {2}{8}Station: {3}{8}Offset: {4}{8}Accuracy: {5}{8}Looking: {6}{8}Note: {7}" `
+    -f $p.FileName,
+       $p.PhotoFolder,
+       $p.Road,
+       $p.Station,
+       $p.Offset,
+       $p.Accuracy,
+       $p.Looking,
+       $p.Note,
+       $nl
+)
 
         # Build the <img> tag with relative src then append text block
         $imgTag   = ('<img src="{0}" style="max-width:500px;max-height:500px;">' -f $p.KmlSrcPath)
@@ -297,3 +393,98 @@ $kml += @(
 
 $kml | Out-File -FilePath $kmlPath -Encoding UTF8
 Write-Host ("KML file created at: {0}" -f $kmlPath)
+}
+
+$masterCsvPath = Join-Path $selectedFolder "photo_metadata_ALL.csv"
+
+$allPhotoData |
+Select-Object FileName,PhotoFolder,Subject,DateTaken,
+Latitude,Longitude,
+Road,Station,Offset,Accuracy,Looking,Note,
+PhotoLinkMaster |
+Export-Csv -Path $masterCsvPath -NoTypeInformation -Encoding UTF8
+
+Write-Host "Master CSV created: $masterCsvPath"
+
+
+$masterKmlPath = Join-Path $selectedFolder "photo_map_ALL.kml"
+
+# -----------------------------
+# Build KML (image + text inside CDATA, relative src)
+# -----------------------------
+$kml = @(
+'<?xml version="1.0" encoding="UTF-8"?>',
+'<kml xmlns="http://earth.google.com/kml/2.0">',
+'  <Document>',
+'    <name>My Photos</name>',
+'    <open>1</open>',
+'    <Style id="Photo">',
+'      <IconStyle>',
+'        <Icon>',
+'          <href>http://maps.google.com/mapfiles/kml/pal4/icon38.png</href>',
+'          <scale>1.0</scale>',
+'        </Icon>',
+'      </IconStyle>',
+'    </Style>',
+'    <Folder>',
+("      <name>{0}</name>" -f $folderName),
+'      <open>0</open>'
+)
+
+foreach ($p in $allPhotoData) {
+if ($null -ne $p.Latitude -and $null -ne $p.Longitude) {
+        # Placemark name preference: Note > Road+Station > Road > FileName
+        $placemarkName =
+            if ($p.Note) {
+                $p.Note
+            } elseif ($p.Road -and $p.Station) {
+                ("{0} – Station {1}" -f $p.Road, $p.Station)
+            } elseif ($p.Road) {
+                $p.Road
+            } else {
+                $p.FileName
+            }
+
+        # Description text block (use Environment.NewLine for reliability)
+        $nl = [Environment]::NewLine
+$desc = (
+    "File: {0}{8}Folder: {1}{8}Road: {2}{8}Station: {3}{8}Offset: {4}{8}Accuracy: {5}{8}Looking: {6}{8}Note: {7}" `
+    -f $p.FileName,
+       $p.PhotoFolder,
+       $p.Road,
+       $p.Station,
+       $p.Offset,
+       $p.Accuracy,
+       $p.Looking,
+       $p.Note,
+       $nl
+)
+
+        # Build the <img> tag with relative src then append text block
+        $imgTag   = ('<img src="{0}" style="max-width:500px;max-height:500px;">' -f $p.KmlSrcPathMaster)
+        $descHtml = $imgTag + ('<div style="white-space:pre-line;font-family:sans-serif;font-size:12px;margin-top:6px;">{0}</div>' -f $desc)
+
+        $kml += @(
+'      <Placemark>',
+("        <description><![CDATA[{0}]]></description>" -f $descHtml),
+'        <Snippet/>',
+("        <name>{0}</name>" -f $placemarkName),
+'        <styleUrl>#Photo</styleUrl>',
+'        <Point>',
+'          <altitudeMode>clampedToGround</altitudeMode>',
+("          <coordinates>{0},{1},0</coordinates>" -f $p.Longitude, $p.Latitude),
+'        </Point>',
+'      </Placemark>'
+        )
+    }
+}
+
+$kml += @(
+'    </Folder>',
+'  </Document>',
+'</kml>'
+)
+
+$kml | Out-File -FilePath $masterKmlPath -Encoding UTF8
+
+Write-Host "Master KML created: $masterKmlPath"
