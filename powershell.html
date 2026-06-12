@@ -1,157 +1,425 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>SKHighway Locator – PowerShell Script</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SKHighway Locator | Photo Processing Tools</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f9f9f9;
-    color: #333;
-    line-height: 1.6;
+
+:root{
+    --primary:#0057b7;
+    --primary-dark:#003f7f;
+    --bg:#f5f7fa;
+    --card:#ffffff;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --border:#e5e7eb;
 }
-header {
-    background-color: #0057b7;
-    color: #fff;
-    padding: 2rem 1rem;
-    text-align: center;
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
-nav {
-    margin-top: 1rem;
+
+body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
 }
-nav a {
-    display: inline-block;
-    background: #fff;
-    color: #0057b7;
-    padding: 0.5rem 1rem;
-    margin: 0.3rem;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
+
+html{
+    scroll-behavior:smooth;
 }
-nav a:hover {
-    background: #003f7f;
-    color: #fff;
+
+/* Navigation */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
 }
-.container {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+
+.nav-container{
+    max-width:1200px;
+    margin:auto;
+    padding:1rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
-h2, h3 {
-    color: #0057b7;
+
+.logo{
+    font-weight:800;
+    font-size:1.25rem;
+    color:var(--primary);
 }
-.note {
-    background: #eef4ff;
-    border-left: 4px solid #0057b7;
-    padding: 1rem;
-    margin: 1.5rem 0;
+
+nav{
+    display:flex;
+    gap:1rem;
+    flex-wrap:wrap;
 }
-pre {
-    background: #f4f4f4;
-    padding: 1rem;
-    overflow-x: auto;
+
+nav a{
+    text-decoration:none;
+    color:var(--text);
+    font-weight:500;
+    transition:.25s;
 }
-.download-button {
-    display: inline-block;
-    background: #0057b7;
-    color: #fff;
-    padding: 0.7rem 1.2rem;
-    text-decoration: none;
-    border-radius: 5px;
+
+nav a:hover{
+    color:var(--primary);
 }
-.download-button:hover {
-    background: #003f7f;
+
+/* Hero */
+
+.hero{
+    background:
+        linear-gradient(
+        135deg,
+        #0057b7 0%,
+        #003f7f 100%);
+    color:white;
+    text-align:center;
+    padding:5rem 1rem;
 }
-footer {
-    text-align: center;
-    padding: 2rem;
-    background: #eaeaea;
-    margin-top: 3rem;
+
+.hero-content{
+    max-width:850px;
+    margin:auto;
 }
+
+.hero h1{
+    font-size:clamp(2.2rem,5vw,4rem);
+    font-weight:800;
+    margin-bottom:1rem;
+}
+
+.hero p{
+    font-size:1.15rem;
+    opacity:.95;
+}
+
+.hero-buttons{
+    margin-top:2rem;
+}
+
+.btn{
+    display:inline-block;
+    text-decoration:none;
+    padding:1rem 1.5rem;
+    border-radius:10px;
+    font-weight:600;
+    transition:.25s;
+}
+
+.btn-primary{
+    background:white;
+    color:var(--primary);
+}
+
+.btn-primary:hover{
+    transform:translateY(-2px);
+}
+
+/* Layout */
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:4rem 1rem;
+}
+
+.section{
+    margin-bottom:3rem;
+}
+
+.section-title{
+    color:var(--primary);
+    font-size:2rem;
+    margin-bottom:1rem;
+}
+
+/* Cards */
+
+.card{
+    background:white;
+    padding:2rem;
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+
+.note{
+    margin-top:1.5rem;
+    background:#eef4ff;
+    border-left:5px solid var(--primary);
+    padding:1rem;
+    border-radius:8px;
+}
+
+.workflow-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(auto-fit,minmax(250px,1fr));
+    gap:1.5rem;
+}
+
+.step{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:1.5rem;
+    transition:.25s;
+}
+
+.step:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+}
+
+.step-number{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:var(--primary);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    margin-bottom:1rem;
+}
+
+pre{
+    background:#111827;
+    color:#f8fafc;
+    padding:1.5rem;
+    border-radius:12px;
+    overflow-x:auto;
+    margin-top:1rem;
+}
+
+code{
+    font-family:Consolas, monospace;
+}
+
+.download-button{
+    display:inline-block;
+    margin-top:1rem;
+    background:var(--primary);
+    color:white;
+    text-decoration:none;
+    padding:1rem 1.5rem;
+    border-radius:10px;
+    font-weight:600;
+}
+
+.download-button:hover{
+    background:var(--primary-dark);
+}
+
+footer{
+    background:#111827;
+    color:#d1d5db;
+    text-align:center;
+    padding:2rem;
+    margin-top:4rem;
+}
+
+@media(max-width:768px){
+
+    .nav-container{
+        flex-direction:column;
+        gap:1rem;
+    }
+
+    nav{
+        justify-content:center;
+    }
+
+}
+
 </style>
+
 </head>
 
 <body>
+
 <header>
-<h1>PowerShell Photo CSV + KML Generator</h1>
-<nav>
-<a href="https://102223629.ca/">Home</a>
-<a href="#overview">Overview</a>
-<a href="#workflow">Workflow</a>
-<a href="#powershell">PowerShell Usage</a>
-</nav>
+    <div class="nav-container">
+        <div class="logo">SKHighway Locator</div>
+
+```
+    <nav>
+        <a href="https://102223629.ca/">Home</a>
+        <a href="#overview">Overview</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#powershell">PowerShell Usage</a>
+    </nav>
+</div>
+```
+
 </header>
+
+<section class="hero">
+    <div class="hero-content">
+
+```
+    <h1>Photo Processing & Mapping Tools</h1>
+
+    <p>
+        Convert SKHighway Locator photos into professional CSV and KML
+        outputs for Excel, GIS workflows, and Google Earth visualization.
+    </p>
+
+    <div class="hero-buttons">
+        <a class="btn btn-primary"
+           href="https://102223629.ca/SKHighway%20Locator%20Powershell%20Script.ps1">
+            Download PowerShell Script
+        </a>
+    </div>
+
+</div>
+```
+
+</section>
 
 <div class="container">
 
-<section id="overview">
-<h2>Overview</h2>
-<p>
-This Windows PowerShell script scans a selected folder and all subfolders for JPEG photos and generates:
-</p>
-<ul>
-<li><strong>photo_metadata.csv</strong> with GPS, date taken, parsed Title fields, and Excel hyperlinks</li>
-<li><strong>photo_map.kml</strong> for Google Earth with embedded images</li>
-</ul>
+<section id="overview" class="section">
 
-<div class="note">
-<strong>Portable by design:</strong>
-All paths are relative. Move the folder anywhere and everything still works.
+```
+<div class="card">
+
+    <h2 class="section-title">Overview</h2>
+
+    <p>
+        This Windows PowerShell utility scans a selected photo folder
+        and all subfolders to automatically generate:
+    </p>
+
+    <ul style="margin-top:1rem; padding-left:1.5rem;">
+        <li><strong>photo_metadata.csv</strong> containing GPS coordinates, photo dates, parsed title fields, and Excel hyperlinks.</li>
+        <li><strong>photo_map.kml</strong> for Google Earth with georeferenced image previews.</li>
+    </ul>
+
+    <div class="note">
+        <strong>Portable by Design:</strong>
+        All generated links use relative paths, allowing folders to be moved
+        or archived without breaking references.
+    </div>
+
+    <a class="download-button"
+       href="https://102223629.ca/SKHighway%20Locator%20Powershell%20Script.ps1">
+        Download Script (.ps1)
+    </a>
+
 </div>
+```
 
-<a class="download-button" href="https://102223629.ca/SKHighway%20Locator%20Powershell%20Script.ps1">
-Download PowerShell Script (.ps1)
-</a>
 </section>
 
-<section id="workflow">
-<h2>General Workflow</h2>
-<ol>
-<li>Take photos using the SKHighway Locator app</li>
-<li>Transfer photos to Windows without compression</li>
-<li>Ensure photos are <strong>.jpg / .jpeg</strong></li>
-<li>Place all photos into one root folder (subfolders allowed)</li>
-<li>Run the PowerShell script and select the root folder</li>
-<li>Open the CSV in Excel and the KML in Google Earth</li>
-</ol>
+<section id="workflow" class="section">
+
+```
+<h2 class="section-title">Workflow</h2>
+
+<div class="workflow-grid">
+
+    <div class="step">
+        <div class="step-number">1</div>
+        Take photos using SKHighway Locator.
+    </div>
+
+    <div class="step">
+        <div class="step-number">2</div>
+        Transfer photos to Windows without compression.
+    </div>
+
+    <div class="step">
+        <div class="step-number">3</div>
+        Verify photos are JPG or JPEG format.
+    </div>
+
+    <div class="step">
+        <div class="step-number">4</div>
+        Place all photos in a root folder. Subfolders are supported.
+    </div>
+
+    <div class="step">
+        <div class="step-number">5</div>
+        Run the PowerShell script and select the folder.
+    </div>
+
+    <div class="step">
+        <div class="step-number">6</div>
+        Open the CSV in Excel and the KML in Google Earth.
+    </div>
+
+</div>
+```
+
 </section>
 
-<section id="powershell">
-<h2>Running the Script</h2>
+<section id="powershell" class="section">
 
-<h3>PowerShell Console</h3>
-<ol>
-<li>Download the script</li>
-<li>Right-click → Properties → Unblock</li>
-<li>Run the following:</li>
-</ol>
+```
+<div class="card">
+
+    <h2 class="section-title">Running the Script</h2>
+
+    <h3>PowerShell Console</h3>
+
+    <p>
+        Download the script, unblock the file, and execute it using:
+    </p>
+```
 
 <pre><code>Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
+
 Unblock-File "C:\Path\To\SKHighway Locator Powershell Script.ps1"
+
 powershell -ExecutionPolicy Bypass -File "C:\Path\To\SKHighway Locator Powershell Script.ps1"</code></pre>
 
-<h3>PowerShell ISE</h3>
-<ol>
-<li>Open PowerShell ISE</li>
-<li>File → Open → select the script</li>
-<li>Press <strong>F5</strong></li>
-<li>Select your photo root folder</li>
-</ol>
+```
+    <br>
 
-<div class="note">
-If the folder dialog does not appear, ensure PowerShell ISE is the active window and press F5 again.
+    <h3>PowerShell ISE</h3>
+
+    <ol style="padding-left:1.5rem;">
+        <li>Open PowerShell ISE</li>
+        <li>File → Open → Select the script</li>
+        <li>Press F5</li>
+        <li>Select your photo folder when prompted</li>
+    </ol>
+
+    <div class="note">
+        If the folder-selection dialog does not appear, ensure
+        PowerShell ISE is the active window and press F5 again.
+    </div>
+
 </div>
+```
 
 </section>
 
 </div>
 
 <footer>
-<p>&copy; 2025 102223629 Saskatchewan Ltd. All Rights Reserved.</p>
+    <p>
+        © 2025 102223629 Saskatchewan Ltd. All Rights Reserved.
+    </p>
 </footer>
+
 </body>
 </html>
